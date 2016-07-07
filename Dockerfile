@@ -1,13 +1,10 @@
-FROM dakr/golangnode
+FROM alpine:3.4
 EXPOSE 8888
 
 WORKDIR /app
-COPY . /app
-RUN npm install
-RUN grunt build
-RUN bash -c ". ~/.bashrc && .shipped/build"
+COPY assets /app/assets
 
-RUN cp .shipped/out /app/aie-burnit
+COPY .shipped/out /app/aie-burnit
 RUN chmod a+x /app/aie-burnit
 
 CMD /app/aie-burnit
